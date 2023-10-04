@@ -1,0 +1,10 @@
+{
+  "exclude": ["./public/"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "resolveJsonModule": true
+  }
+}

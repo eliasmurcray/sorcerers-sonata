@@ -1,0 +1,34 @@
+{
+  "name": "sorcerers-sonata",
+  "version": "1.0.0",
+  "description": "An adventure game.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliasmurcray/sorcerers-sonata.git"
+  },
+  "author": "Elias Murcray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eliasmurcray/sorcerers-sonata/issues"
+  },
+  "homepage": "https://github.com/eliasmurcray/sorcerers-sonata#readme",
+  "devDependencies": {
+    "@types/html-webpack-plugin": "^3.2.6",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "typescript": "^5.2.2"
+  }
+}
