@@ -39,6 +39,7 @@ const camera = new Camera(0, 0, 0, 1200, 0, 1200, canvas);
 // Setup player
 const player = new Player(300, 300);
 player.bindEventListeners(canvas, camera);
+player.setWorldBounds(0, 1200, 0, 1200);
 
 let scene: () => void;
 

@@ -110,6 +110,12 @@ class Player extends Circle {
       this.xVelocity += this.movementSpeed;
     }
 
+    // Walls
+    this.x += this.xVelocity;
+    walls.forEach((wall) => wall.resolveCircleCollision(this));
+    this.y += this.yVelocity;
+    walls.forEach((wall) => wall.resolveCircleCollision(this));
+
     // World boundaries
     if (this.x < this.worldXMin + this.radius) {
       this.x = this.worldXMin + this.radius;
@@ -121,12 +127,6 @@ class Player extends Circle {
     } else if (this.y > this.worldYMax - this.radius) {
       this.y = this.worldYMax - this.radius;
     }
-
-    // Walls
-    this.x += this.xVelocity;
-    walls.forEach((wall) => wall.resolveCircleCollision(this));
-    this.y += this.yVelocity;
-    walls.forEach((wall) => wall.resolveCircleCollision(this));
   }
 
   render(
