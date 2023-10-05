@@ -1,5 +1,6 @@
 import Camera from "./Camera";
 import Player from "./Player";
+import Wall from "./Wall";
 import "./style.css";
 import { get } from "./util";
 
@@ -20,14 +21,28 @@ canvas.width = 600;
 canvas.height = 600;
 gameWrapper.appendChild(canvas);
 
+let walls = [];
+for (let i = 0; i < 20; i++) {
+  walls.push(
+    new Wall(
+      Math.random() * 1200,
+      Math.random() * 1200,
+      Math.random() * 30 + 10,
+      Math.random() * 30 + 10
+    )
+  );
+}
+
+// Setup camera
+const camera = new Camera(0, 0, 0, 1200, 0, 1200, canvas);
+
 // Setup player
 const player = new Player(300, 300);
-player.bindEventListeners(canvas);
+player.bindEventListeners(canvas, camera);
 
 let scene: () => void;
 
 let shake = 0;
-const camera = new Camera(0, 0, 0, 1200, 0, 1200, canvas);
 function game() {
   // Render objects
   ctx.save();
@@ -39,12 +54,16 @@ function game() {
     shake *= shake > 1 ? 0.8 : 0;
   }
   ctx.drawImage(assets.background, 0, 0);
+  walls.forEach((wall) => {
+    ctx.fillStyle = "#000";
+    ctx.fillRect(wall.x, wall.y, wall.width, wall.height);
+  });
   player.render(ctx, assets);
   ctx.restore();
 
   // Update game state
   camera.lookAt(player.x, player.y);
-  player.update([]);
+  player.update(walls);
 }
 
 let loadAssets = (function () {

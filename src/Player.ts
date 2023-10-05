@@ -50,13 +50,16 @@ class Player extends Circle {
     this.keys = [];
   }
 
-  bindEventListeners(canvas: HTMLCanvasElement): void {
+  bindEventListeners(canvas: HTMLCanvasElement, camera: Camera): void {
     canvas.tabIndex = 1;
     canvas.addEventListener(
       "mousemove",
       (event: MouseEvent) => {
         this.angle =
-          Math.atan2(event.offsetY - this.y, event.offsetX - this.x) +
+          Math.atan2(
+            event.offsetY - this.y - camera.y,
+            event.offsetX - this.x - camera.x
+          ) +
           Math.PI / 2;
       },
       { passive: true }

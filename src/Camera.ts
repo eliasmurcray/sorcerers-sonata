@@ -7,6 +7,8 @@ class Camera {
   private maxY: number;
   private minX: number;
   private minY: number;
+  #offsetX: number;
+  #offsetY: number;
 
   constructor(
     x: number,
@@ -21,8 +23,10 @@ class Camera {
     this.y = y;
     this.maxX = -minX;
     this.maxY = -minY;
-    this.minX = -maxX - canvas.width;
-    this.minY = -maxY - canvas.height;
+    this.minX = -maxX + canvas.width;
+    this.minY = -maxY + canvas.height;
+    this.#offsetX = canvas.width / 2 - 19;
+    this.#offsetY = canvas.height / 2 - 19;
   }
 
   /**
@@ -38,8 +42,16 @@ class Camera {
    * @returns {void}
    */
   public lookAt(x: number, y: number): void {
-    this.x = constrain(lerp(this.x, x, 0.1), this.minX, this.maxX);
-    this.y = constrain(lerp(this.y, y, 0.1), this.minY, this.maxY);
+    this.x = constrain(
+      lerp(this.x, this.#offsetX - x, 0.1),
+      this.minX,
+      this.maxX
+    );
+    this.y = constrain(
+      lerp(this.y, this.#offsetY - y, 0.1),
+      this.minY,
+      this.maxY
+    );
   }
 }
 
