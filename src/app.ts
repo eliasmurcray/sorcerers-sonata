@@ -22,13 +22,13 @@ canvas.height = 600;
 gameWrapper.appendChild(canvas);
 
 let walls = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 100; i++) {
   walls.push(
     new Wall(
       Math.random() * 1200,
       Math.random() * 1200,
-      Math.random() * 30 + 10,
-      Math.random() * 30 + 10
+      Math.random() * 30 + 30,
+      Math.random() * 30 + 30
     )
   );
 }
@@ -162,7 +162,7 @@ let loadAssets = (function () {
 
 scene = loadAssets;
 
-const FPS = 60;
+const FPS = 120;
 const FRAME_TIME = 1000 / FPS;
 let then = window.performance.now();
 
