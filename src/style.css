@@ -2,9 +2,15 @@ body {
   margin: 0;
   background: #ffffff;
   margin: 0;
+  display: flex;
+  column-gap: 25px;
 }
 
 canvas {
   display: block;
   outline: 0;
+}
+
+.instructions {
+  font-family: sans-serif;
 }
