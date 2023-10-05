@@ -5,12 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack -- --watch"
+    "dev": "webpack -- --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eliasmurcray/sorcerers-sonata.git"
-  },
+  "repository": "git+https://github.com/eliasmurcray/sorcerers-sonata.git",
   "author": "Elias Murcray",
   "license": "MIT",
   "bugs": {

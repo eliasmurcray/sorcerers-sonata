@@ -5,6 +5,7 @@
     "target": "ESNext",
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   }
 }
