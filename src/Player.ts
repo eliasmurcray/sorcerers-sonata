@@ -26,6 +26,7 @@ class Player extends Circle {
   private worldYMin: number;
   private xVelocity: number;
   private yVelocity: number;
+  private keys: boolean[];
 
   #maxSwingAngle: number = Math.PI;
   #constSwingDelay: number = 90;
@@ -46,14 +47,28 @@ class Player extends Circle {
     this.weaponIndex = 0;
     this.xVelocity = 0;
     this.yVelocity = 0;
+    this.keys = [];
   }
 
   bindEventListeners(canvas: HTMLCanvasElement): void {
-    canvas.onmousemove = (event: MouseEvent) => {
-      this.angle =
-        Math.atan2(event.offsetY - this.y, event.offsetX - this.x) +
-        Math.PI / 2;
-    };
+    canvas.tabIndex = 1;
+    canvas.addEventListener(
+      "mousemove",
+      (event: MouseEvent) => {
+        this.angle =
+          Math.atan2(event.offsetY - this.y, event.offsetX - this.x) +
+          Math.PI / 2;
+      },
+      { passive: true }
+    );
+
+    canvas.addEventListener("keydown", (event: KeyboardEvent) => {
+      this.keys[event.keyCode] = true;
+    });
+
+    canvas.addEventListener("keyup", (event: KeyboardEvent) => {
+      delete this.keys[event.keyCode];
+    });
   }
 
   setWorldBounds(
@@ -68,37 +83,28 @@ class Player extends Circle {
     this.worldYMax = worldYMax;
   }
 
-  update(
-    camera: Camera,
-    mouseX: number,
-    mouseY: number,
-    keys: boolean[],
-    walls: Wall[]
-  ): void {
-    this.angle =
-      Math.atan2(mouseY - this.y - camera.y, mouseX - this.x - camera.x) +
-      HALF_PI;
+  update(walls: Wall[]): void {
     this.xVelocity = 0;
     this.yVelocity = 0;
 
-    if (keys[49]) {
+    if (this.keys[49]) {
       this.weaponIndex = 0;
-    } else if (keys[50]) {
+    } else if (this.keys[50]) {
       this.weaponIndex = 1;
     }
 
-    if (keys[65]) {
+    if (this.keys[65]) {
       this.xVelocity -= this.movementSpeed;
     }
-    if (keys[87]) {
-      this.xVelocity += this.movementSpeed;
-    }
-
-    if (keys[83]) {
+    if (this.keys[87]) {
       this.yVelocity -= this.movementSpeed;
     }
-    if (keys[68]) {
+
+    if (this.keys[83]) {
       this.yVelocity += this.movementSpeed;
+    }
+    if (this.keys[68]) {
+      this.xVelocity += this.movementSpeed;
     }
 
     this.x += this.xVelocity;

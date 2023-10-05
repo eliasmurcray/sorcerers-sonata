@@ -21,8 +21,8 @@ class Camera {
     this.y = y;
     this.maxX = -minX;
     this.maxY = -minY;
-    this.minX = -maxX - canvas.width / 2;
-    this.minY = -maxY - canvas.height / 2;
+    this.minX = -maxX - canvas.width;
+    this.minY = -maxY - canvas.height;
   }
 
   /**

@@ -44,6 +44,7 @@ function game() {
 
   // Update game state
   camera.lookAt(player.x, player.y);
+  player.update([]);
 }
 
 let loadAssets = (function () {
@@ -145,8 +146,6 @@ scene = loadAssets;
 const FPS = 60;
 const FRAME_TIME = 1000 / FPS;
 let then = window.performance.now();
-const startTime = then;
-let frameCount = 0;
 
 function animationLoop(now: number) {
   requestAnimationFrame(animationLoop);
@@ -154,8 +153,6 @@ function animationLoop(now: number) {
   let elapsed = now - then;
   if (elapsed > FRAME_TIME) {
     then = now - (elapsed % FRAME_TIME);
-    const __frameRate = (1000 * ++frameCount) / (now - startTime);
-    console.log(`__frameRate: ${__frameRate.toFixed(3)}`);
     scene();
   }
 }
